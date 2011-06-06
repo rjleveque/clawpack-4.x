@@ -1,0 +1,43 @@
+
+begin_html [use: jsMath] [use: eagleclaw/eagleclaw.css]
+
+<!----------------------------------------------------------------
+     For a more readable version of this file, execute
+                  unix>  make htmls
+     in this directory and then point your browser to examples.html
+--------------------------------------------------------------------->
+
+<eagle1>EagleClaw -- Return to a previous run</eagle1>
+
+<eagle2>Easy Access Graphical Laboratory for
+        Exploring Conservation Laws</eagle2>
+
+
+<p>
+
+
+<hr>
+<form action="http://localhost:50005/cgi-bin/eaglechdir.py.cgi" method="POST">
+<h3>
+To return to results you have previously calculated, type the directory name
+in the box and click "Submit" </h3>
+<p>
+This should be a string of numbers of the form yymmdd.hhmmss based on the
+original creation time.
+<p>
+<input type="text" name="rundir" size="15" value="">&nbsp;&nbsp;
+<input type="submit" name=request value="Submit">
+&nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="runs/index.html">Index of Archived Runs</a>
+<p>
+</form>
+<hr>
+
+
+<p>
+<h3>
+To view sample runs or create a new run, return to the 
+<a href="examples.html">EagleClaw Example Index</a>.
+</h3>
+
+end_html

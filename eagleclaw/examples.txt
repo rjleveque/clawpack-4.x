@@ -1,0 +1,118 @@
+
+begin_html [use: jsMath] [use: eagleclaw/eagleclaw.css]
+
+<!----------------------------------------------------------------
+     For a more readable version of this file, execute
+                  unix>  make htmls
+     in this directory and then point your browser to examples.html
+--------------------------------------------------------------------->
+
+
+<title>EagleClaw Example Index</title>
+
+
+
+<eagle1>EagleClaw</eagle1>
+
+<eagle2>Easy Access Graphical Laboratory for
+        Exploring Conservation Laws</eagle2>
+
+
+<h2>Index of Clawpack Examples with EagleClaw pages</h2>
+
+Please see <a href="../eagleclaw/index.html">eagleclaw/index.html</a> for more
+information about EagleClaw before attempting to run one of the examples
+below.
+
+
+<p class="indent1">
+From these webpages click on "README.html" for more information about the
+examples and to view html versions of the Fortran and Python code used
+to do the computations and plot the results.
+
+
+<hr>
+<a href="returning.html">Return to previously computed results</a>
+&nbsp; (if you've used these pages before and want to re-visit a previous run)
+<p>
+<h3>
+To view sample runs or create a new run, choose from the examples below...
+</h3>
+<p>
+From these webpages click on "README.html" for more information about the
+examples and to view html versions of the Fortran and Python code used
+to do the computations and plot the results, documented in the spirit of
+<a href="http://www.amath.washington.edu/~rjl/lprr.html">
+Literate Programming</a>.
+<br>
+<p>
+<hr>
+<p>
+<eagle2>One space dimension</eagle2>
+<p>
+<eagle4>Advection:</eagle4>
+
+<p>
+Scalar equation
+&nbsp;  $q_t + uq_x = 0$ &nbsp; with $u$ constant
+<ul>
+<li> <a href="../examples/advection/1d/eagle1/eaglemenu.html">
+advection/1d/eagle1</a> With initial data consisting of a step function and/or wave packet.
+
+
+</ul>
+<br>
+<br>
+<eagle4>Acoustics:</eagle4>
+<p>
+Linear system of 2 equations
+&nbsp;  $q_t + Aq_x = 0$ &nbsp; with $A$ constant
+
+<p>
+<ul>
+<li> <a href="../examples/acoustics/1d/eagle1/eaglemenu.html">
+acoustics/1d/eagle1</a>  With initial data consisting of a step function and/or wave packet.
+
+
+</ul>
+<p>
+<br>
+<eagle4>Burgers' equation:</eagle4>
+<p>
+Scalar nonlinear equation
+&nbsp;  $q_t + (q^2/2)_x = 0$ &nbsp;
+<ul>
+<li> <a href="../examples/burgers/1d/eagle1/eaglemenu.html">
+burgers/1d/eagle1</a> 
+With initial data consisting of a step function and/or wave packet.
+<p>
+<li> <a href="../examples/burgers/1d/eagle2/eaglemenu.html">
+burgers/1d/eagle2</a> 
+With piecewise constant initial data with 1 or 2 
+discontinuities (e.g. Riemann problem).
+</ul>
+
+<hr>
+<p>
+<eagle2>Two space dimensions</eagle2>
+<p>
+<eagle4>Advection:</eagle4>
+
+<p>
+Scalar equation
+&nbsp;  $q_t + uq_x +vq_y = 0$ &nbsp; with $u(x,y)$ and $v(x,y)$ specified.
+<ul>
+<p>
+<li> [link: ../examples/advection/2d/eagle1/eaglemenu.html advection/2d/eagle1]
+Solid body rotation with choice of three grid types 
+<p>
+<li> [link: ../examples/advection/2d/eagle1/amr/eaglemenu.html advection/2d/eagle1/amr]
+With AMR
+</ul>
+
+
+<hr>
+<p>
+More examples to come...
+
+end_html

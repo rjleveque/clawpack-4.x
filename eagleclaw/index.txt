@@ -1,0 +1,123 @@
+
+begin_html [use: jsMath] [use: eagleclaw/eagleclaw.css]
+
+<!----------------------------------------------------------------
+     For a more readable version of this file, execute
+                  unix>  make htmls
+     in this directory and then point your browser to examples.html
+--------------------------------------------------------------------->
+
+<eagle1>EagleClaw</eagle1>
+
+<eagle2>Easy Access Graphical Laboratory for
+        Exploring Conservation Laws</eagle2>
+
+
+<p>
+
+<eagle4>Introduction</eagle4>
+
+<p class="indent1">
+Please <b>read this page</b> and then click on the link to a 
+list of on-line <b>examples</b> at the [link: #bottom bottom]
+of this page.
+</p><p class="indent1">
+
+
+EagleClaw is based on the <a href="http://www.clawpack.org">Clawpack Version
+5.0</a>
+software, primarily designed for solving hyperbolic systems of conservation
+laws.  
+</p><p class="indent1">
+EagleClaw provides a web-page interface to Clawpack with the following goals:
+<ul>
+<li> To allow those studying hyperbolic problems to experiment
+with several examples without the need to download and install code or
+read a user's manual.
+</p><p class="indent1">
+<li> To allow potential users of Clawpack to try it out before downloading
+and installing.
+</p><p class="indent1">
+<li> To provide a simplifed interface that may be useful also for those
+modifying and running Clawpack on their own computer.  A web server is easy
+to start in Python on your local machine to serve your own EagleClaw pages
+(see <a href="../README.html">claw/README</a>).
+</p><p class="indent1">
+<li> To facilitate on-line documentation of the Clawpack software using a
+new approach to <a href="http://www.amath.washington.edu/~rjl/lprr.html">
+Literate Programming</a>.
+html pages are generated from Fortran and Python programs using
+[doc:clawcode2html.html clawcode2html], a version of
+[http://www.amath.washington.edu/~rjl/mathcode2html/ mathcode2html]
+designed for use with Clawpack.  
+See <a href="../examples/acoustics/1d/example1/rp1ac.f.html">the Riemann solver for
+acoustics</a> for an example.
+<p>
+<li> Clawpack documentation is now being develped in Sphinx, see
+[link: ../doc/sphinx/_build Clawpack 5.0 documentation].
+</ul>
+
+</p>
+<eagle4>Browser issues</eagle4><p class="indent1">
+These web pages were designed using Firefox and they work reliably
+with Firefox on Linux, Windows, and Mac OS X.
+</p><p class="indent1">
+They don't seem to work always with Safari or Internet Explorer, for
+reasons
+not yet understood.
+
+
+
+</p>
+<eagle4>jsMath issues</eagle4>
+<p class="indent1">
+Some of these web pages use <a
+href="http://www.math.union.edu/~dpvc/jsMath/welcome.html">jsMath</a> to
+display mathematics typeset in latex.  If this equation:
+</p><p class="indent1">
+    \[ \frac{\partial}{\partial t} q(x,t) + 
+       \frac{\partial}{\partial x} f(q(x,t)) = 0   \]
+</p><p class="indent1">
+looks like
+latex instead of being typeset, you probably need to
+<a href="http://www.math.union.edu/~dpvc/jsMath/users/fonts.html">
+install some fonts</a>, which is easy to do.  
+
+</p><p class="indent1">
+Click on the jsMath icon in the lower
+corner for some other useful things.
+</p>
+
+<eagle4>License</eagle4>
+<p class="indent1">
+
+Copyright 1994--2008 by <a href="http://www.clawpack.org/authors.html">the
+authors</a>
+</p><p class="indent1">
+CLAWPACK is released under the terms of the
+GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+</p><p class="indent1">
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a href="http://www.gnu.org/licenses/">GNU General Public License</a>
+for more details,
+
+</p>
+<hr>
+<p class="indent1">
+
+<a name="bottom">
+<eagle2>Index of Clawpack Examples with EagleClaw pages</eagle2>
+
+See <a href="examples.html">claw/eagleclaw/examples.html</a>
+for a list of EagleClaw examples.
+</p><p class="indent1">
+From these webpages click on "README.html" for more information about the
+examples and to view html versions of the Fortran and Python code used
+to do the computations and plot the results.
+
+end_html
