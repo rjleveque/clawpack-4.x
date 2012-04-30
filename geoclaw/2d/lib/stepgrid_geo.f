@@ -27,6 +27,7 @@ c      fixed grids specified in setfixedgrids.data
 c :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
       use geoclaw_module
+      use fixedgrid_module
 
       implicit double precision (a-h,o-z)
       external rpn2,rpt2
@@ -47,6 +48,10 @@ c :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
       logical    debug,  dump
       data       debug/.false./,  dump/.false./
+
+c     # New fixed grid stuff:
+      type(fgrid), pointer :: fg
+
 c
 c     # set tcom = time.  This is in the common block comxyt that could
 c     # be included in the Riemann solver, for example, if t is explicitly
@@ -207,7 +212,25 @@ c        # levelcheck > 0.
       enddo
       tcfmax=max(tcfmax,tcf)
 c:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+c     New fixed grid stuff
+     
+c     # update maxima for values to be monitored each timestep
+      if (FG_NUM_MAXVALS > 0) then
+          do ifg=1,num_fgrids
+              fg => fgrids(ifg)
+              ! only monitor max values for levels specified, and over
+              ! the time period specified:
+              if (((time .ge. fg%tstart) .and. (time .le. fg%tend)) 
+     &          .and. (level .ge. fg%min_level_for_max)) then
+                  call fixedgrid_maxupdate(mx,my,nvar,mbc,maux,q,aux,
+     &                 dx,dy,xlowmbc,ylowmbc,fg,level)
+                  endif
+              enddo
+           endif
 
+      
+
+c:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 c
 c     # take one step on the conservation law:
 c

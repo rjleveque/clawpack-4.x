@@ -584,6 +584,8 @@ c     --------------------------------------------------------
 
 c     # Done with computation, cleanup:
 
+c     # Print out the new style fixed grid valmax and aux files:
+      call fixedgrid_finalize()
 
       lentotsave = lentot
       call cleanup(nvar,naux)

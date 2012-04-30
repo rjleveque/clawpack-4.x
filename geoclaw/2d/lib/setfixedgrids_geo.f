@@ -4,10 +4,16 @@ c=========================================================================
 
       implicit double precision (a-h,o-z)
       character*25, parameter :: fname = 'setfixedgrids.data'
+      character*30, parameter :: fname2 = 'setfixedgrids2.data'
       logical foundFile
 
       include "fixedgrids.i"
       include "call.i"
+
+c     :::::::::::::::::::::::::::::
+c     New version:
+      call fixedgrid_read(fname2)
+c     :::::::::::::::::::::::::::::
 
       write(parmunit,*) ' '
       write(parmunit,*) '--------------------------------------------'

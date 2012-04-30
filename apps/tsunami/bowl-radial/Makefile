@@ -41,6 +41,14 @@ GEOLIB = $(CLAW)/geoclaw/2d/lib
 
 CLAW_LIBSOURCES = \
   $(GEOLIB)/geoclaw_mod.f90 \
+  $(GEOLIB)/dummy_amr_module.f90 \
+  $(GEOLIB)/stepgrid_newfg_geo.f \
+  $(GEOLIB)/fixedgrid_module.f90 \
+  $(GEOLIB)/fixedgrid_read.f90 \
+  $(GEOLIB)/fixedgrid_values.f90 \
+  $(GEOLIB)/fixedgrid_interpolate.f90 \
+  $(GEOLIB)/fixedgrid_frompatch.f90 \
+  $(GEOLIB)/fixedgrid_finalize.f90 \
   $(GEOLIB)/topo_mod.f90 \
   $(GEOLIB)/dtopo_mod.f90 \
   $(GEOLIB)/setprob_geo.f \
@@ -50,7 +58,6 @@ CLAW_LIBSOURCES = \
   $(GEOLIB)/cellgridintegrate_geo.f \
   $(GEOLIB)/topointegral_geo.f \
   $(GEOLIB)/bilinearintegral_geo.f \
-  $(GEOLIB)/stepgrid_geo.f \
   $(GEOLIB)/fgridinterp_geo.f \
   $(GEOLIB)/fgridout_geo.f \
   $(GEOLIB)/rpn2ez_geo.f \
