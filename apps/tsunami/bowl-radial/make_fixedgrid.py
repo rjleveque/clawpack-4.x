@@ -5,12 +5,14 @@ Create fixed grid output file in new style.
 from numpy import linspace
 
 def makefgrid1():
-    mx = 11
-    my = 11
+    mx = 51
+    my = 51
     xlower = 0.
-    xupper = 20.
+    xupper = 50.
     ylower = 0.
-    yupper = 20.
+    yupper = 50.
+
+
     x = linspace(xlower, xupper, mx)
     y = linspace(ylower, yupper, my)
     npts = mx*my
@@ -20,8 +22,8 @@ def makefgrid1():
     fid.write("""
         1          # num_fgrids
         1          # fgno for first fgrid
-        1., 2.     # tstart,tend
-        1          # min_level_for_max
+        0.5, 0.6     # tstart,tend
+        2          # min_level_for_max
         0          # num_output
         %s          # npts
         \n""" % npts)

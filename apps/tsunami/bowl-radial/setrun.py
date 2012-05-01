@@ -102,8 +102,8 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.nout = 8
-        clawdata.tfinal = 2.0
+        clawdata.nout = 4
+        clawdata.tfinal = 1.0
 
     elif clawdata.outstyle == 2:
         # Specify a list of output times.  
@@ -210,10 +210,10 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
     # List of refinement ratios at each level (length at least mxnest-1)
-    clawdata.inratx = [2,4,4]
-    clawdata.inraty = [2,4,4]
+    clawdata.inratx = [4,4,4]
+    clawdata.inraty = [4,4,4]
 
-    clawdata.inratt = [2,4,4]
+    clawdata.inratt = [4,4,4]
     # Instead of setting these ratios, set:
     # geodata.variable_dt_refinement_ratios = True
     # in setgeo.

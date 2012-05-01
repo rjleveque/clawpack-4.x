@@ -41,7 +41,6 @@ GEOLIB = $(CLAW)/geoclaw/2d/lib
 
 CLAW_LIBSOURCES = \
   $(GEOLIB)/geoclaw_mod.f90 \
-  $(GEOLIB)/dummy_amr_module.f90 \
   $(GEOLIB)/stepgrid_newfg_geo.f \
   $(GEOLIB)/fixedgrid_module.f90 \
   $(GEOLIB)/fixedgrid_read.f90 \
