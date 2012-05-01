@@ -17,7 +17,7 @@ subroutine fixedgrid_read(fname)
     ! <repeat for additional grids from fgridno line>
 
     use fixedgrid_module
-    use dummy_amr_module
+    ! Note: should use mxnest in place of FG_AMR_MAX_LEVELS from above module
 
     implicit none
     character(30), intent(in) :: fname
@@ -67,11 +67,11 @@ subroutine fixedgrid_read(fname)
     ! allocate and initialize arrays
     allocate(fg%valuemax(1:FG_NUM_VAL, 1:fg%npts))
     allocate(fg%levelmax(1:fg%npts))
-    allocate(fg%aux(1:AMR_MAX_LEVELS, 1:FG_NUM_AUX, 1:fg%npts))
+    allocate(fg%aux(1:FG_AMR_MAX_LEVELS, 1:FG_NUM_AUX, 1:fg%npts))
     fg%valuemax = FG_NOTSET
     fg%levelmax = 0
     fg%aux = FG_NOTSET
-    print *, '+++ fg%aux in read: ',fg%aux
+    !print *, '+++ fg%aux in read: ',fg%aux
 
     ! Set corners of bounding box.
     fg%x1bb = minval(fg%x)

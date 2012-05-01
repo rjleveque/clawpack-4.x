@@ -1,15 +1,18 @@
 module fixedgrid_module
 
-    use dummy_amr_module, only: AMR_MAX_LEVELS
-    ! need to fix this!  Should be mxnest
-    !integer, parameter :: AMR_MAX_LEVELS = 7
+    ! need to fix this!  Should be mxnest from the computation...
+    integer, parameter :: FG_AMR_MAX_LEVELS = 7
 
     type fgrid
+
+        ! Derived data type for a single fixed grid.
+        ! An array of objects of this type is used to keep track of all
+        ! fixed grids in a computation.
 
         ! identifier number for this fixed grid:
         integer :: fgno
 
-        ! time range to monitor and output times
+        ! time range to monitor, and output times
         real(kind=8) :: tstart, tend
         integer :: num_output
         real(kind=8), allocatable, dimension(:) :: t_output
@@ -26,7 +29,8 @@ module fixedgrid_module
         real(kind=8), allocatable, dimension(:,:) :: valuemax
         integer, allocatable, dimension(:) :: levelmax
 
-        ! mininum level to check when updating valuemax:
+        ! Mininum level to check when updating valuemax:
+        ! Coarser levels will be ignored to save computation time.
         integer :: min_level_for_max
 
         ! Coordinates of corners of bounding box.
@@ -56,6 +60,6 @@ module fixedgrid_module
     integer :: FG_num_fgrids
 
     ! keep track of whether all aux arrays have been computed on a given level:
-    logical :: FG_auxdone(1:AMR_MAX_LEVELS) = .false.
+    logical :: FG_auxdone(1:FG_AMR_MAX_LEVELS) = .false.
 
 end module fixedgrid_module

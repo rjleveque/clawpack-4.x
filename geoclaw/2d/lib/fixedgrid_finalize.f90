@@ -4,9 +4,7 @@ subroutine fixedgrid_finalize()
     ! Print out the maxval and aux arrays and de-allocate storage.
 
     use fixedgrid_module
-
-    ! should use mxnest in place of this...
-    use dummy_amr_module, only: AMR_MAX_LEVELS  
+    ! Note: should use mxnest in place of FG_AMR_MAX_LEVELS from above module
 
     implicit none
     character(30) :: fname
@@ -26,7 +24,7 @@ subroutine fixedgrid_finalize()
         do k=1,fg%npts
             write(FG_UNIT,111) fg%x(k),fg%y(k), fg%levelmax(k), &
                   (fg%valuemax(mv,k), mv=1,FG_NUM_VAL)
- 111        format(2d17.8,i4,20d17.8)
+ 111        format(2e17.8,i4,20e17.8)
             enddo
 
         close(FG_UNIT)
@@ -40,8 +38,8 @@ subroutine fixedgrid_finalize()
 
             do k=1,fg%npts
                 write(FG_UNIT,112) fg%x(k),fg%y(k), &
-                      (fg%aux(level,ma,k), level=1,AMR_MAX_LEVELS)
- 112            format(2d17.8,20d17.8)
+                      (fg%aux(level,ma,k), level=1,FG_AMR_MAX_LEVELS)
+ 112            format(2e17.8,20e17.8)
                 enddo
 
             close(FG_UNIT)

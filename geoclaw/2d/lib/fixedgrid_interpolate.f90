@@ -30,10 +30,10 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
     integer, allocatable, dimension(:) :: ik, jk
     real(kind=8) :: x1,x2,y1,y2,x,y,xupper,yupper
 
-    debug = .false.
+    debug = .true.
     if (debug) then
-        print *, '=================='
-        print *, 'Level = ',level
+        write(61,*) '========================================'
+        write(61,*) 'In fixedgrid_interpolate, Level = ',level
         endif
 
     fg => FG_fgrids(ifg)
@@ -64,18 +64,18 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
     y1 = max(ylower, fg%y1bb) !- dy
     y2 = min(yupper, fg%y2bb) !+ dy
     if (debug) then
-        print *, 'xlower,xupper: ',xlower,xupper
-        print *, 'ylower,yupper: ',ylower,yupper
-        print *, 'x1bb, x2bb: ',fg%x1bb, fg%x2bb
-        print *, 'y1bb, y2bb: ',fg%y1bb, fg%y2bb
-        print *, 'Intersection x1, x2:',x1,x2
-        print *, 'Intersection y1, y2:',y1,y2
+        write(61,*) 'xlower,xupper: ',xlower,xupper
+        write(61,*) 'ylower,yupper: ',ylower,yupper
+        write(61,*) 'x1bb, x2bb: ',fg%x1bb, fg%x2bb
+        write(61,*) 'y1bb, y2bb: ',fg%y1bb, fg%y2bb
+        write(61,*) 'Intersection x1, x2:',x1,x2
+        write(61,*) 'Intersection y1, y2:',y1,y2
         endif
 
     ! If this grid does not intersect the bounding box of fg, do nothing:
     if ((x1 > x2) .or. (y1 > y2)) then
         if (debug) then
-            print *, '+++ no intersection found',x1,x2,y1,y2
+            write(61,*) '+++ No intersection found!'
             endif
         mask_fgrid = .false.
         return
@@ -87,8 +87,8 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
     j1 = int((y1 - ylower + 0.5d0*dy) / dy)
     j2 = int((y2 - ylower + 0.5d0*dy) / dy) + 1
     if (debug) then
-        print *, 'i1,i2: ',i1,i2
-        print *, 'j1,j2: ',j1,j2
+        write(61,*) 'patch intersecting fgrid: i1,i2: ',i1,i2
+        write(61,*) 'patch intersecting fgrid: j1,j2: ',j1,j2
         endif
     forall (i=1-mbc:mx+mbc, j=1-mbc:my+mbc)
         mask_patch(i,j) = ((i >= i1) .and. (i <= i2) .and. &
@@ -96,22 +96,19 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
         end forall
 
     ! Create a mask that is .true. only in part of fgrid intersecting patch:
-    print *, '+++ fg%npts = ',fg%npts
-    print *, '+++ in interp: shape(mask_fgrid) is ',shape(mask_fgrid)
-    print *, '+++ mask_fgrid = ',mask_fgrid
     do k=1,fg%npts
         mask_fgrid(k) = ((fg%x(k) >= x1) .and. (fg%x(k) <= x2) .and. &
                          (fg%y(k) >= y1) .and. (fg%y(k) <= y2))
         enddo
 
     if (debug) then
-        print *, '+++ mask_patch is true only at i,j,x,y: '
+        write(61,*) '+++ mask_patch is true only at i,j,x,y: '
         do i=1-mbc,mx+mbc
             x = xlower + (i-0.5d0)*dx
             do j=1-mbc,my+mbc
                 y = ylower + (j-0.5d0)*dy
                 if (mask_patch(i,j)) then
-                    print 63, i,j,x,y
+                    write(61,63) i,j,x,y
  63                 format(2i4,2d16.6)
                     endif
                 enddo
@@ -158,10 +155,10 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
         enddo
 
     if (debug) then
-        print *, '+++ mask_fgrid is true only at k,x,y,ik,jk,dxk,dyk: '
+        write(61,*) '+++ mask_fgrid is true only at k,x,y,ik,jk,dxk,dyk: '
         do k=1,fg%npts
             if (mask_fgrid(k)) then
-                write(6,62) k,fg%x(k),fg%y(k), ik(k),jk(k),dxk(k),dyk(k)
+                write(61,62) k,fg%x(k),fg%y(k), ik(k),jk(k),dxk(k),dyk(k)
  62             format(i4,2d16.6,2i6,2d16.6)
                 endif
             enddo
@@ -212,14 +209,14 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
                 end forall
     
             do k=1,fg%npts 
-                print *, '+++ loop on k, aux = ', fg%aux(level,ma,k)
-                print *, '+++ diff = ', fg%aux(level,ma,k) - FG_NOTSET
+                !print *, '+++ loop on k, aux = ', fg%aux(level,ma,k)
+                !print *, '+++ diff = ', fg%aux(level,ma,k) - FG_NOTSET
                 if (mask_fgrid(k) .and. (fg%aux(level,ma,k) == FG_NOTSET)) then
                     fg%aux(level,ma,k) = aux(ik(k),jk(k),ma) &
                            + a(ik(k),jk(k))*dxk(k) &
                            + b(ik(k),jk(k))*dyk(k) &
                            + c(ik(k),jk(k))*dxk(k)*dyk(k)
-                    print *, '+++ set aux to ', fg%aux(level,ma,k)
+                    !print *, '+++ set aux to ', fg%aux(level,ma,k)
     !               write(6,64) ma,aux(ik(k),jk(k),ma),a(ik(k),jk(k)), &
     !                  b(ik(k),jk(k)),c(ik(k),jk(k))
     !64             format('ma,aux,a,b,c: ',i2,4d16.6)
