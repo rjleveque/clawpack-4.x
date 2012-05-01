@@ -33,6 +33,11 @@ module fixedgrid_module
         ! Coarser levels will be ignored to save computation time.
         integer :: min_level_for_max
 
+        ! Desired maximum delta t between updating valuemax:
+        ! Will only update at start of time step if end of timestep is
+        ! to far beyond last update time
+        real(kind=8) :: dt_for_max
+
         ! Coordinates of corners of bounding box.
         ! This will be useful when generalizing to fgrids not aligned with x-y.
         real(kind=8) :: x1bb,x2bb,y1bb,y2bb
@@ -61,5 +66,8 @@ module fixedgrid_module
 
     ! keep track of whether all aux arrays have been computed on a given level:
     logical :: FG_auxdone(1:FG_AMR_MAX_LEVELS) = .false.
+
+    ! turn on debugging output to fort.61:
+    logical, parameter :: FG_DEBUG = .true.
 
 end module fixedgrid_module

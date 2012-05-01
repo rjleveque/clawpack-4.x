@@ -22,15 +22,15 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
     type(fgrid), pointer :: fg
     integer :: i,j,k,mv,ma,fg_npts
     integer :: i1,i2,j1,j2
-    logical :: debug
     logical, allocatable, dimension(:,:) :: mask_patch
     real(kind=8), allocatable, dimension(:,:,:) :: values
     real(kind=8), allocatable, dimension(:,:) :: a,b,c
     real(kind=8), allocatable, dimension(:) :: dxk, dyk
     integer, allocatable, dimension(:) :: ik, jk
     real(kind=8) :: x1,x2,y1,y2,x,y,xupper,yupper
+    logical :: debug
 
-    debug = .true.
+    debug = FG_DEBUG
     if (debug) then
         write(61,*) '========================================'
         write(61,*) 'In fixedgrid_interpolate, Level = ',level

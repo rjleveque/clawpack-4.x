@@ -26,9 +26,11 @@ subroutine fixedgrid_frompatch(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
     do ifg=1,FG_num_fgrids
         fg => FG_fgrids(ifg)
 
-        write(61,61) ifg,level,time
- 61     format('---------- In fixedgrid_frompatch ----------',/, &
-               '+++ ifg = ',i2,' level = ',i1,' time = ',d16.6)
+        if (FG_DEBUG) then
+            write(61,61) ifg,level,time
+ 61         format('---------- In fixedgrid_frompatch ----------',/, &
+               'ifg = ',i2,' level = ',i1,' time = ',d16.6)
+            endif
         if ((time >= fg%tstart) .and. (time <= fg%tend) .and. &
                 (level >= fg%min_level_for_max) .and. &
                 (level >= minval(fg%levelmax))) then
