@@ -26,6 +26,7 @@ GEOCLAW_LIB = $(shell pwd)
 CLAW_LIB = $(CLAW)/amrclaw/2d/lib/
 
 CLAW_SOURCES = \
+  $(GEOCLAW_LIB)/fixedgrid_module.f90 \
   $(GEOCLAW_LIB)/geoclaw_mod.f90 \
   $(GEOCLAW_LIB)/topo_mod.f90 \
   $(GEOCLAW_LIB)/dtopo_mod.f90 \
@@ -67,6 +68,12 @@ CLAW_SOURCES = \
   $(GEOCLAW_LIB)/src2_geo.f \
   $(GEOCLAW_LIB)/step2_geo.f \
   $(GEOCLAW_LIB)/stepgrid_geo.f \
+  $(GEOCLAW_LIB)/stepgrid_newfg_geo.f \
+  $(GEOCLAW_LIB)/fixedgrid_read.f90 \
+  $(GEOCLAW_LIB)/fixedgrid_values.f90 \
+  $(GEOCLAW_LIB)/fixedgrid_interpolate.f90 \
+  $(GEOCLAW_LIB)/fixedgrid_frompatch.f90 \
+  $(GEOCLAW_LIB)/fixedgrid_finalize.f90 \
   $(GEOCLAW_LIB)/tick_geo.f \
   $(GEOCLAW_LIB)/topointegral_geo.f \
   $(GEOCLAW_LIB)/upbnd_geo.f \
