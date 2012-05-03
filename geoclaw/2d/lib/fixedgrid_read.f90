@@ -1,5 +1,5 @@
 
-subroutine fixedgrid_read(fname)
+subroutine fixedgrid_read()
 
     ! Read in data file describing any fixed grids.
     ! The file is assumed to have the form:
@@ -21,21 +21,19 @@ subroutine fixedgrid_read(fname)
     ! Note: should use mxnest in place of FG_AMR_MAX_LEVELS from above module
 
     implicit none
-    character(30), intent(in) :: fname
+    character(30) :: fname = 'setfixedgrids2.data'
     integer :: k,ifg
     type(fgrid), pointer :: fg
-    logical :: test, foundFile
+    logical :: foundFile
 
     inquire(file=trim(fname),exist=foundFile)
     if (.not. foundFile) then
       write(*,*) 'No fixedgrid file in new style '
-      write(*,*) 'Looking for: XX',trim(fname),'XX'
+      write(*,*) 'Looking for: ',trim(fname)
       FG_num_fgrids = 0
-      stop
       return
       endif
 
-    !print *, 'fname = XX',fname,'XX'
     open(unit=FG_UNIT,file=trim(fname),status='old')
     read(FG_UNIT,*) FG_num_fgrids
     print *, 'FG_num_fgrids = ',FG_num_fgrids
