@@ -35,16 +35,17 @@ subroutine fixedgrid_frompatch(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
             write(61,61) ifg,level,time
  61         format('---------- In fixedgrid_frompatch ----------',/, &
                'ifg = ',i2,' level = ',i1,' time = ',d16.6)
+            if (time_afterstep <= minval(fg%t_last_updated)+fg%dt_for_max) then
+                write(61,68) time, minval(fg%t_last_updated)
+     68         format('++++ Skipping update at t = ', e20.11,' min t_last = ',&
+                       e20.11)
+            else
+                write(61,67) time, minval(fg%t_last_updated)
+     67         format('++++ Doing update at t = ', e20.11,' min t_last = ', &
+                       e20.11)
+                endif
             endif
-        if (time_afterstep <= minval(fg%t_last_updated)+fg%dt_for_max) then
-            write(61,68) time, minval(fg%t_last_updated)
- 68         format('++++ Skipping update at t = ', e20.11,' min t_last = ', &
-                   e20.11)
-        else
-            write(61,67) time, minval(fg%t_last_updated)
- 67         format('++++ Doing update at t = ', e20.11,' min t_last = ', &
-                   e20.11)
-            endif
+
         if ((time >= fg%tstart_max) .and. (time <= fg%tend_max) .and. &
                 (level >= fg%min_level_for_max) .and. &
                 (level >= minval(fg%levelmax)) .and. &

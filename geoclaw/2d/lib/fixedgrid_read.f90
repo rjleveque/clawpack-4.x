@@ -6,11 +6,13 @@ subroutine fixedgrid_read()
     ! 
     ! FG_num_fgrids  # number of fixed grids
     ! 1           # fgridno: number of first fixed grid.  
-    ! tstart,tend # start and end time for monitoring this fgrid.
+    ! tstart_max,tend_max # start and end time for monitoring this fgrid.
     ! dt_for_max  # desired maximum time between updating max values.
     ! min_level_for_max # minimum level to use for monitoring max.
-    ! num_output  # number of times to output values on fgrid.
-    ! t_output    # output times (or empty line if none).
+    ! tstart_output,tend_output # start and end time for output on this fgrid.
+    ! dt_for_max  # desired maximum time between output.
+    ! min_level_mor_output # minimum level to output results
+    ! 
     ! npts        # number of grid points
     ! x(1), y(1)  # first grid point
     ! ...

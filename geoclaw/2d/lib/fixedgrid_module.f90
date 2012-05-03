@@ -78,6 +78,6 @@ module fixedgrid_module
     integer :: FG_num_fgrids
 
     ! turn on debugging output to fort.61:
-    logical, parameter :: FG_DEBUG = .true.
+    logical, parameter :: FG_DEBUG = .false.
 
 end module fixedgrid_module
