@@ -7,6 +7,7 @@ subroutine fixedgrid_read(fname)
     ! FG_num_fgrids  # number of fixed grids
     ! 1           # fgridno: number of first fixed grid.  
     ! tstart,tend # start and end time for monitoring this fgrid.
+    ! dt_for_max  # desired maximum time between updating max values.
     ! min_level_for_max # minimum level to use for monitoring max.
     ! num_output  # number of times to output values on fgrid.
     ! t_output    # output times (or empty line if none).
@@ -47,14 +48,18 @@ subroutine fixedgrid_read(fname)
 
     do ifg = 1,FG_num_fgrids
         fg => FG_fgrids(ifg)   ! point to next element of array of fgrids
-        read(FG_UNIT,*) fg%fgno
-        read(FG_UNIT,*) fg%tstart, fg%tend
+        !read(FG_UNIT,*) fg%fgno
+        read(FG_UNIT,*) fg%tstart_max, fg%tend_max
+        read(FG_UNIT,*) fg%dt_for_max
         read(FG_UNIT,*) fg%min_level_for_max
-        read(FG_UNIT,*) fg%num_output
-        if (fg%num_output > 0) then
-            allocate(fg%t_output(1:fg%num_output))
-            read(FG_UNIT,*) fg%t_output(1:fg%num_output)
-            endif
+        read(FG_UNIT,*) fg%tstart_output, fg%tend_output
+        read(FG_UNIT,*) fg%dt_for_output
+        read(FG_UNIT,*) fg%min_level_for_output
+        !read(FG_UNIT,*) fg%num_output
+        !if (fg%num_output > 0) then
+        !    allocate(fg%t_output(1:fg%num_output))
+        !    read(FG_UNIT,*) fg%t_output(1:fg%num_output)
+        !    endif
         read(FG_UNIT,*) fg%npts
         allocate(fg%x(1:fg%npts), fg%y(1:fg%npts))
         do k=1,fg%npts
@@ -68,9 +73,13 @@ subroutine fixedgrid_read(fname)
     allocate(fg%valuemax(1:FG_NUM_VAL, 1:fg%npts))
     allocate(fg%levelmax(1:fg%npts))
     allocate(fg%aux(1:FG_AMR_MAX_LEVELS, 1:FG_NUM_AUX, 1:fg%npts))
+    allocate(fg%tmax(1:FG_NUM_VAL, 1:fg%npts))
+    allocate(fg%t_last_updated(1:fg%npts))
     fg%valuemax = FG_NOTSET
     fg%levelmax = 0
     fg%aux = FG_NOTSET
+    fg%tmax = FG_NOTSET
+    fg%t_last_updated = FG_NOTSET
     !print *, '+++ fg%aux in read: ',fg%aux
 
     ! Set corners of bounding box.
@@ -79,12 +88,8 @@ subroutine fixedgrid_read(fname)
     fg%y1bb = minval(fg%y)
     fg%y2bb = maxval(fg%y)
 
-    test = .true.
-    if (test) then
-        print *, 'fg%num_output = ',fg%num_output
-        if (fg%num_output > 0) then
-            print *, 'fg%t_output = ',fg%t_output(1:fg%num_output)
-            endif
-        endif
+    !print *, '++++ bounding box in read:'
+    !print *, fg%x1bb,fg%x2bb,fg%y1bb,fg%y2bb
+    !stop
 
 end subroutine fixedgrid_read

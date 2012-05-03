@@ -23,7 +23,8 @@ subroutine fixedgrid_finalize()
 
         do k=1,fg%npts
             write(FG_UNIT,111) fg%x(k),fg%y(k), fg%levelmax(k), &
-                  (fg%valuemax(mv,k), mv=1,FG_NUM_VAL)
+                  (fg%valuemax(mv,k), mv=1,FG_NUM_VAL), &
+                  (fg%tmax(mv,k), mv=1,FG_NUM_VAL)
  111        format(2e17.8,i4,20e17.8)
             enddo
 

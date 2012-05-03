@@ -10,12 +10,7 @@ module fixedgrid_module
         ! fixed grids in a computation.
 
         ! identifier number for this fixed grid:
-        integer :: fgno
-
-        ! time range to monitor, and output times
-        real(kind=8) :: tstart, tend
-        integer :: num_output
-        real(kind=8), allocatable, dimension(:) :: t_output
+        !integer :: fgno ! deprecated
 
         ! fixed grid points are (x(k),y(k)), for k=1:npts
         integer :: npts
@@ -27,16 +22,31 @@ module fixedgrid_module
         !        k = 1:npts
         real(kind=8), allocatable, dimension(:,:,:) :: aux
         real(kind=8), allocatable, dimension(:,:) :: valuemax
+        real(kind=8), allocatable, dimension(:,:) :: tmax
+        real(kind=8), allocatable, dimension(:) :: t_last_updated
         integer, allocatable, dimension(:) :: levelmax
 
-        ! Mininum level to check when updating valuemax:
-        ! Coarser levels will be ignored to save computation time.
-        integer :: min_level_for_max
-
+        ! time range to monitor:
+        real(kind=8) :: tstart_max, tend_max
         ! Desired maximum delta t between updating valuemax:
         ! Will only update at start of time step if end of timestep is
         ! to far beyond last update time
         real(kind=8) :: dt_for_max
+        ! Mininum level to check when updating valuemax:
+        ! Coarser levels will be ignored to save computation time.
+        integer :: min_level_for_max
+
+
+        ! time range for output:
+        real(kind=8) :: tstart_output, tend_output
+        ! Desired maximum delta t between updating valuemax:
+        real(kind=8) :: dt_for_output
+        ! Mininum level to create output files
+        integer :: min_level_for_output
+
+        !integer :: num_output
+        !real(kind=8), allocatable, dimension(:) :: t_output
+
 
         ! Coordinates of corners of bounding box.
         ! This will be useful when generalizing to fgrids not aligned with x-y.

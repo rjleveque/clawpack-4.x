@@ -38,22 +38,11 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
 
     fg => FG_fgrids(ifg)
     fg_npts = fg%npts
+    !write(61,*) '++++ interpolate xNbb', fg%x1bb, fg%x2bb
     
     !write(6,61) fg%fgno, fg%npts
  61 format('Updating fgrid number ',i2,' with',i7,' points')
 
-    !allocate(mask_fgrid(1:fg_npts))
-    !allocate(fg_values(FG_NUM_VAL, 1:fg_npts))
-
-    allocate(mask_patch(1-mbc:mx+mbc, 1-mbc:my+mbc))
-    allocate(values(FG_NUM_VAL, 1-mbc:mx+mbc, 1-mbc:my+mbc))
-    allocate(a(1-mbc:mx+mbc, 1-mbc:my+mbc))
-    allocate(b(1-mbc:mx+mbc, 1-mbc:my+mbc))
-    allocate(c(1-mbc:mx+mbc, 1-mbc:my+mbc))
-    allocate(dxk(1:fg%npts))
-    allocate(dyk(1:fg%npts))
-    allocate(ik(1:fg%npts))
-    allocate(jk(1:fg%npts))
 
     ! Determine intersection of this patch with bounding box of fgrid:
 
@@ -80,6 +69,16 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
         mask_fgrid = .false.
         return
         endif
+
+    allocate(mask_patch(1-mbc:mx+mbc, 1-mbc:my+mbc))
+    allocate(values(FG_NUM_VAL, 1-mbc:mx+mbc, 1-mbc:my+mbc))
+    allocate(a(1-mbc:mx+mbc, 1-mbc:my+mbc))
+    allocate(b(1-mbc:mx+mbc, 1-mbc:my+mbc))
+    allocate(c(1-mbc:mx+mbc, 1-mbc:my+mbc))
+    allocate(dxk(1:fg%npts))
+    allocate(dyk(1:fg%npts))
+    allocate(ik(1:fg%npts))
+    allocate(jk(1:fg%npts))
 
     ! Create a mask that is .true. only in part of patch intersecting fgrid:
     i1 = int((x1 - xlower + 0.5d0*dx) / dx)
