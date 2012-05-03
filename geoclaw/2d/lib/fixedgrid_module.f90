@@ -52,6 +52,9 @@ module fixedgrid_module
         ! This will be useful when generalizing to fgrids not aligned with x-y.
         real(kind=8) :: x1bb,x2bb,y1bb,y2bb
 
+        ! keep track of whether all aux arrays have been computed on a given level:
+        logical :: auxdone(1:FG_AMR_MAX_LEVELS) = .false.
+
     end type
 
     ! declare array fgrids of fixed grids, each of type fgrid.
@@ -73,9 +76,6 @@ module fixedgrid_module
 
     ! number of fixed grids in use (set by fixedgrid_read):
     integer :: FG_num_fgrids
-
-    ! keep track of whether all aux arrays have been computed on a given level:
-    logical :: FG_auxdone(1:FG_AMR_MAX_LEVELS) = .false.
 
     ! turn on debugging output to fort.61:
     logical, parameter :: FG_DEBUG = .true.

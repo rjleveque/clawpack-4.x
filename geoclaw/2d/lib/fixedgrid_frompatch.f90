@@ -27,6 +27,8 @@ subroutine fixedgrid_frompatch(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
     !write(61,*) level,mx,my,xlower,ylower
     do ifg=1,FG_num_fgrids
         fg => FG_fgrids(ifg)
+        !write(6,*) '++++ ifg = ',ifg
+        !write(6,*) '++++ fg%xNbb = ',fg%x1bb,fg%x2bb
         !write(61,*) '++++ frompatch xNbb', fg%x1bb, fg%x2bb
 
         if (FG_DEBUG) then
@@ -78,6 +80,7 @@ subroutine fixedgrid_frompatch(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
                     fg%levelmax(k) = level
                     endif
                 enddo
+                deallocate(mask_fgrid, fg_values)
             endif
         enddo
 

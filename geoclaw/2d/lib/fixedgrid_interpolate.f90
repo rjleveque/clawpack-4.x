@@ -177,8 +177,6 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
 
         do k=1,fg%npts 
             if (mask_fgrid(k)) then
-                ! Only update valuemax if current patch is at least
-                ! as high a level as the patch last used to update
                 fg_values(mv,k) = values(mv,ik(k),jk(k)) &
                        + a(ik(k),jk(k))*dxk(k) &
                        + b(ik(k),jk(k))*dyk(k) &
@@ -193,7 +191,7 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
 
 
     ! Set the fg%aux(level,:,:) if this hasn't yet been set.
-    if ((maux > 0) .and. (.not. FG_auxdone(level))) then
+    if ((maux > 0) .and. (.not. fg%auxdone(level))) then
         ! at least some points do not yet have fg%aux set on this level
 
         do ma=1,FG_NUM_AUX
@@ -226,7 +224,7 @@ subroutine fixedgrid_interpolate(mx,my,meqn,mbc,maux,q,aux,dx,dy, &
         if (minval(fg%aux(level,1,:)) > FG_NOTSET) then
             ! Done with aux arrays at all fgrid points on this level
             !print *, '+++ level,fg%aux:',level,fg%aux(level,1,1)
-            FG_auxdone(level) = .true.
+            fg%auxdone(level) = .true.
             endif
         endif
 

@@ -65,31 +65,32 @@ subroutine fixedgrid_read(fname)
         do k=1,fg%npts
             read(FG_UNIT,*) fg%x(k), fg%y(k)
             enddo
+
+        ! allocate and initialize arrays
+        allocate(fg%valuemax(1:FG_NUM_VAL, 1:fg%npts))
+        allocate(fg%levelmax(1:fg%npts))
+        allocate(fg%aux(1:FG_AMR_MAX_LEVELS, 1:FG_NUM_AUX, 1:fg%npts))
+        allocate(fg%tmax(1:FG_NUM_VAL, 1:fg%npts))
+        allocate(fg%t_last_updated(1:fg%npts))
+        fg%valuemax = FG_NOTSET
+        fg%levelmax = 0
+        fg%aux = FG_NOTSET
+        fg%tmax = FG_NOTSET
+        fg%t_last_updated = FG_NOTSET
+        !print *, '+++ fg%aux in read: ',fg%aux
+
+        ! Set corners of bounding box.
+        fg%x1bb = minval(fg%x)
+        fg%x2bb = maxval(fg%x)
+        fg%y1bb = minval(fg%y)
+        fg%y2bb = maxval(fg%y)
+
+        print *, '++++ bounding box in read:'
+        print *, fg%x1bb,fg%x2bb,fg%y1bb,fg%y2bb
+        !stop
         enddo
 
     close(FG_UNIT)
 
-    ! allocate and initialize arrays
-    allocate(fg%valuemax(1:FG_NUM_VAL, 1:fg%npts))
-    allocate(fg%levelmax(1:fg%npts))
-    allocate(fg%aux(1:FG_AMR_MAX_LEVELS, 1:FG_NUM_AUX, 1:fg%npts))
-    allocate(fg%tmax(1:FG_NUM_VAL, 1:fg%npts))
-    allocate(fg%t_last_updated(1:fg%npts))
-    fg%valuemax = FG_NOTSET
-    fg%levelmax = 0
-    fg%aux = FG_NOTSET
-    fg%tmax = FG_NOTSET
-    fg%t_last_updated = FG_NOTSET
-    !print *, '+++ fg%aux in read: ',fg%aux
-
-    ! Set corners of bounding box.
-    fg%x1bb = minval(fg%x)
-    fg%x2bb = maxval(fg%x)
-    fg%y1bb = minval(fg%y)
-    fg%y2bb = maxval(fg%y)
-
-    !print *, '++++ bounding box in read:'
-    !print *, fg%x1bb,fg%x2bb,fg%y1bb,fg%y2bb
-    !stop
 
 end subroutine fixedgrid_read
