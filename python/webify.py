@@ -8,11 +8,20 @@
 
 import os,sys,glob
 
-rootdir = '..'
-targetfiles = ['README.txt']
+#rootdir = '..'
+clawdir = os.path.expandvars('$CLAW')
+rootdir = clawdir
+targetfiles = ['*.html','load.js']
+oldpat = "http://localhost:50005"
+newpat = "http://depts.washington.edu/clawpack/clawpack-4.6.2"
 
-oldpat = "http://kingkong.amath.washington.edu/clawpack/users"
-newpat = "http://www.clawpack.org/users"
+print "Will change ", oldpat
+print "  to        ", newpat
+print "  in all of ", rootdir
+ans = raw_input("Ok? ")
+if ans.lower() not in ['y','yes']:
+    print "Aborting."
+    sys.exit()
 
 for (dirpath, subdirs, files) in os.walk(rootdir):
     currentdir = os.path.abspath(os.getcwd())

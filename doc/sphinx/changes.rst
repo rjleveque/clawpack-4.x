@@ -21,7 +21,7 @@ plans for other changes.
 
 .. _new_in_claw4_6_2:
 
-New in Clawpack 4.6.2 (not yet released)
+New in Clawpack 4.6.2 
 ========================================
 
 * OpenMP capability added to amrclaw and geoclaw.  See :ref:`openmp`
@@ -52,6 +52,15 @@ New in Clawpack 4.6.2 (not yet released)
 
 * Documentation added on how to set up a GeoClaw run for tsunami modeling,
   see :ref:`quick_tsunami`.
+
+Known bugs
+----------
+
+* Conservation is no longer maintained in some examples with periodic boundary
+  conditions.  In `$CLAW/apps/advection/2d/example/amr` and
+  `$CLAW/apps/burgers/2d/pwconst/amr` mass is conserved to `1e-4` with the
+  parameters as set in `setrun.py`, but used to
+  be conserved to roughly `1e-14`.  This needs to be debugged.
 
 .. _new_in_claw4_6_1:
 
